@@ -1,0 +1,168 @@
+Compiler: GCC 13.3.0
+Build label: O0
+Hardware threads: 1
+
+Self-test passed: own all_of == std::all_of on 2000 random cases
+
+=== N = 100000 | predicate: cheap (x > 0) | file: seq_100000.txt ===
+-- Library std::all_of (median of 31 runs)
+  no policy       0.6660 ms   result=true
+  seq             1.8417 ms   result=true
+  par             1.9544 ms   result=true
+  par_unseq       1.7908 ms   result=true
+  unseq           1.9950 ms   result=true
+-- Own chunked all_of, K threads (median of 31 runs); sequential library baseline = 0.6719 ms
+  K=    1      0.9378 ms   speedup 0.72x
+  K=    2      0.9777 ms   speedup 0.69x
+  K=    3      0.9704 ms   speedup 0.69x
+  K=    4      1.0366 ms   speedup 0.65x
+  K=    6      1.0917 ms   speedup 0.62x
+  K=    8      1.1374 ms   speedup 0.59x
+  K=   12      1.3026 ms   speedup 0.52x
+  K=   16      1.4268 ms   speedup 0.47x
+  K=   24      1.6256 ms   speedup 0.41x
+  K=   32      1.9112 ms   speedup 0.35x
+  K=   48      2.3925 ms   speedup 0.28x
+  K=   64      1.9206 ms   speedup 0.35x
+  K=  128      3.3290 ms   speedup 0.20x
+  K=  256      5.8909 ms   speedup 0.11x
+  K=  512     12.5714 ms   speedup 0.05x
+  K= 1024     33.3059 ms   speedup 0.02x
+BEST K = 1 | time 0.9378 ms | hardware threads = 1 | K/threads = 1.00
+FIT (K >= 4): t(K) = a + b*K, a = 0.3740 ms, b = 0.03003 ms/thread, R^2 = 0.9763
+
+=== N = 100000 | predicate: expensive (exp(log1p(x)) > 0.5) | file: seq_100000.txt ===
+-- Library std::all_of (median of 31 runs)
+  no policy       2.9562 ms   result=true
+  seq             5.0196 ms   result=true
+  par             4.3157 ms   result=true
+  par_unseq       4.0540 ms   result=true
+  unseq           3.9948 ms   result=true
+-- Own chunked all_of, K threads (median of 31 runs); sequential library baseline = 2.9416 ms
+  K=    1      2.9460 ms   speedup 1.00x
+  K=    2      2.9341 ms   speedup 1.00x
+  K=    3      3.0299 ms   speedup 0.97x
+  K=    4      2.9557 ms   speedup 1.00x
+  K=    6      2.9526 ms   speedup 1.00x
+  K=    8      4.2879 ms   speedup 0.69x
+  K=   12      3.0336 ms   speedup 0.97x
+  K=   16      3.1598 ms   speedup 0.93x
+  K=   24      3.3438 ms   speedup 0.88x
+  K=   32      3.5551 ms   speedup 0.83x
+  K=   48      4.2263 ms   speedup 0.70x
+  K=   64      4.5849 ms   speedup 0.64x
+  K=  128      5.9913 ms   speedup 0.49x
+  K=  256      8.8166 ms   speedup 0.33x
+  K=  512     14.0018 ms   speedup 0.21x
+  K= 1024     26.9759 ms   speedup 0.11x
+BEST K = 2 | time 2.9341 ms | hardware threads = 1 | K/threads = 2.00
+FIT (K >= 4): t(K) = a + b*K, a = 2.9753 ms, b = 0.02306 ms/thread, R^2 = 0.9960
+
+=== N = 1000000 | predicate: cheap (x > 0) | file: seq_1000000.txt ===
+-- Library std::all_of (median of 15 runs)
+  no policy       6.6451 ms   result=true
+  seq            19.2336 ms   result=true
+  par            19.0241 ms   result=true
+  par_unseq      17.3900 ms   result=true
+  unseq          21.3026 ms   result=true
+-- Own chunked all_of, K threads (median of 15 runs); sequential library baseline = 6.6987 ms
+  K=    1      6.6533 ms   speedup 1.01x
+  K=    2      6.7138 ms   speedup 1.00x
+  K=    3      6.7340 ms   speedup 0.99x
+  K=    4      7.0811 ms   speedup 0.95x
+  K=    6      7.5260 ms   speedup 0.89x
+  K=    8      6.8232 ms   speedup 0.98x
+  K=   12      6.8030 ms   speedup 0.98x
+  K=   16      6.9269 ms   speedup 0.97x
+  K=   24      7.1958 ms   speedup 0.93x
+  K=   32      7.2578 ms   speedup 0.92x
+  K=   48      7.7959 ms   speedup 0.86x
+  K=   64      8.0706 ms   speedup 0.83x
+  K=  128      9.7610 ms   speedup 0.69x
+  K=  256     12.7746 ms   speedup 0.52x
+  K=  512     17.9763 ms   speedup 0.37x
+  K= 1024     28.8859 ms   speedup 0.23x
+BEST K = 1 | time 6.6533 ms | hardware threads = 1 | K/threads = 1.00
+FIT (K >= 4): t(K) = a + b*K, a = 6.8170 ms, b = 0.02168 ms/thread, R^2 = 0.9983
+
+=== N = 1000000 | predicate: expensive (exp(log1p(x)) > 0.5) | file: seq_1000000.txt ===
+-- Library std::all_of (median of 15 runs)
+  no policy      30.5523 ms   result=true
+  seq            39.1732 ms   result=true
+  par            41.7544 ms   result=true
+  par_unseq      41.7302 ms   result=true
+  unseq          41.3864 ms   result=true
+-- Own chunked all_of, K threads (median of 15 runs); sequential library baseline = 30.3342 ms
+  K=    1     29.5845 ms   speedup 1.03x
+  K=    2     35.0937 ms   speedup 0.86x
+  K=    3     30.4404 ms   speedup 1.00x
+  K=    4     30.3073 ms   speedup 1.00x
+  K=    6     39.1722 ms   speedup 0.77x
+  K=    8     28.5642 ms   speedup 1.06x
+  K=   12     30.0494 ms   speedup 1.01x
+  K=   16     32.7915 ms   speedup 0.93x
+  K=   24     40.6392 ms   speedup 0.75x
+  K=   32     30.6337 ms   speedup 0.99x
+  K=   48     31.7242 ms   speedup 0.96x
+  K=   64     31.9513 ms   speedup 0.95x
+  K=  128     33.8113 ms   speedup 0.90x
+  K=  256     37.9554 ms   speedup 0.80x
+  K=  512     43.6490 ms   speedup 0.69x
+  K= 1024     61.8269 ms   speedup 0.49x
+BEST K = 8 | time 28.5642 ms | hardware threads = 1 | K/threads = 8.00
+FIT (K >= 4): t(K) = a + b*K, a = 31.8542 ms, b = 0.02763 ms/thread, R^2 = 0.8354
+
+=== N = 10000000 | predicate: cheap (x > 0) | file: seq_10000000.txt ===
+-- Library std::all_of (median of 7 runs)
+  no policy      65.7608 ms   result=true
+  seq           191.7684 ms   result=true
+  par           184.8841 ms   result=true
+  par_unseq     169.9364 ms   result=true
+  unseq         206.8860 ms   result=true
+-- Own chunked all_of, K threads (median of 7 runs); sequential library baseline = 66.9386 ms
+  K=    1     75.9669 ms   speedup 0.88x
+  K=    2     74.5976 ms   speedup 0.90x
+  K=    3     68.6789 ms   speedup 0.97x
+  K=    4     68.7146 ms   speedup 0.97x
+  K=    6     70.6068 ms   speedup 0.95x
+  K=    8     68.2718 ms   speedup 0.98x
+  K=   12     77.0580 ms   speedup 0.87x
+  K=   16     67.0334 ms   speedup 1.00x
+  K=   24     70.0972 ms   speedup 0.95x
+  K=   32     69.0921 ms   speedup 0.97x
+  K=   48     69.3386 ms   speedup 0.97x
+  K=   64     69.2653 ms   speedup 0.97x
+  K=  128     73.5549 ms   speedup 0.91x
+  K=  256     85.6310 ms   speedup 0.78x
+  K=  512     84.7619 ms   speedup 0.79x
+  K= 1024     98.8057 ms   speedup 0.68x
+BEST K = 16 | time 67.0334 ms | hardware threads = 1 | K/threads = 16.00
+FIT (K >= 4): t(K) = a + b*K, a = 69.9113 ms, b = 0.02970 ms/thread, R^2 = 0.8647
+
+=== N = 10000000 | predicate: expensive (exp(log1p(x)) > 0.5) | file: seq_10000000.txt ===
+-- Library std::all_of (median of 7 runs)
+  no policy     313.2473 ms   result=true
+  seq           430.6262 ms   result=true
+  par           418.9394 ms   result=true
+  par_unseq     436.9734 ms   result=true
+  unseq         422.6692 ms   result=true
+-- Own chunked all_of, K threads (median of 7 runs); sequential library baseline = 310.6432 ms
+  K=    1    329.1184 ms   speedup 0.94x
+  K=    2    334.8704 ms   speedup 0.93x
+  K=    3    341.9305 ms   speedup 0.91x
+  K=    4    364.3153 ms   speedup 0.85x
+  K=    6    323.3942 ms   speedup 0.96x
+  K=    8    310.8528 ms   speedup 1.00x
+  K=   12    321.5074 ms   speedup 0.97x
+  K=   16    343.9258 ms   speedup 0.90x
+  K=   24    298.9815 ms   speedup 1.04x
+  K=   32    320.0391 ms   speedup 0.97x
+  K=   48    322.8256 ms   speedup 0.96x
+  K=   64    320.0028 ms   speedup 0.97x
+  K=  128    398.3152 ms   speedup 0.78x
+  K=  256    294.2612 ms   speedup 1.06x
+  K=  512    354.6870 ms   speedup 0.88x
+  K= 1024    370.6929 ms   speedup 0.84x
+BEST K = 256 | time 294.2612 ms | hardware threads = 1 | K/threads = 256.00
+FIT (K >= 4): t(K) = a + b*K, a = 327.4073 ms, b = 0.04101 ms/thread, R^2 = 0.1599
+
